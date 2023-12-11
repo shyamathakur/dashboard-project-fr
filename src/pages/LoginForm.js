@@ -16,7 +16,7 @@ function LoginForm() {
       formdata.append("password", password);
       try {
         const resp = await fetch(
-          "http://travellingnorth.ca/MVA/public/api/login",
+          "https://travellingnorth.ca/MVA/public/api/login",
           {
             method: "POST",
             body: formdata,
