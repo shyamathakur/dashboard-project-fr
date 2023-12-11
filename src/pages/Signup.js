@@ -44,7 +44,7 @@ function Signup() {
 
     try {
       const resp = await fetch(
-        "http://travellingnorth.ca/MVA/public/api/organizations",
+        "https://travellingnorth.ca/MVA/public/api/organizations",
         {
           method: "POST",
           body: formdata,

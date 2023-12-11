@@ -52,7 +52,7 @@ function Dashboard() {
 
     try {
       const resp = await fetch(
-        "http://travellingnorth.ca/MVA/public/api/clients",
+        "https://travellingnorth.ca/MVA/public/api/clients",
         requestOptions
       );
       const result = await resp.json();
@@ -193,7 +193,7 @@ function Dashboard() {
                                   <TbEdit className="text-lg cursor-pointer text-gray-600" />
                                 </Link>
                                 <a
-                                  href={`http://travellingnorth.ca/MVA/public/pdf/${item.slug}`}
+                                  href={`https://travellingnorth.ca/MVA/public/pdf/${item.slug}`}
                                   target="_blanck"
                                 >
                                   <FaFileDownload className="text-lg cursor-pointer text-gray-600" />

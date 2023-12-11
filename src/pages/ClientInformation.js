@@ -138,7 +138,7 @@ const ClientInformation = (props) => {
 
     try {
       const resp = await fetch(
-        `http://travellingnorth.ca/MVA/public/api/clients/${slug}`,
+        `https://travellingnorth.ca/MVA/public/api/clients/${slug}`,
         requestOptions
       );
       const result = await resp.json();
@@ -186,7 +186,7 @@ const ClientInformation = (props) => {
 
       try {
         const resp = await fetch(
-          `http://travellingnorth.ca/MVA/public/api/clients${
+          `https://travellingnorth.ca/MVA/public/api/clients${
             urlSlug ? `/edit/${urlSlug}` : ""
           }`,
           requestOptions
