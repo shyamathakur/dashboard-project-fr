@@ -11,31 +11,59 @@ import { FaChevronRight } from "react-icons/fa6";
 import { CiMenuKebab } from "react-icons/ci";
 import { GoDotFill } from "react-icons/go";
 import { BiCalendarStar } from "react-icons/bi";
+import { TbEdit } from "react-icons/tb";
 import { FaSearch } from "react-icons/fa";
-
+import { FaEye } from "react-icons/fa";
+import { FaFileDownload } from "react-icons/fa";
 import "./Dashboard.css";
 import Sidenav from "../components/Sidenav";
-import ClientInformation from "../components/ClientInformation";
-import Occupation from "../components/Occupation";
-import Referral from "../components/Referral";
-import Representative from "../components/Representative";
-import Identification from "../components/Identification";
+import { Link, useNavigate } from "react-router-dom";
 
 function Dashboard() {
+  const navigate = useNavigate();
   const [openMenu, setOpenMenu] = useState("dashboard");
-  const [openSubMenu, setOpenSubMenu] = useState("clientInformation");
+  const [openSubMenu, setOpenSubMenu] = useState("");
   const [value, onChange] = useState(new Date());
   const [activeDate, setActiveDate] = useState("");
+  const [clientData, setClientData] = useState([]);
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
     if (value) {
       let newDate = value.toDateString();
-      const newActiveDate = ` ${newDate?.split(" ")[2]} ${newDate?.split(" ")[1]
-        } ${newDate?.split(" ")[3]}`;
+      const newActiveDate = ` ${newDate?.split(" ")[2]} ${
+        newDate?.split(" ")[1]
+      } ${newDate?.split(" ")[3]}`;
       setActiveDate(newActiveDate);
     }
   }, [value]);
+  useEffect(() => {
+    getClientInformation();
+  }, []);
 
-  console.log("val----", value, activeDate);
+  const getClientInformation = async () => {
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
+    myHeaders.append("ContentType", "application/json");
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+    };
+
+    try {
+      const resp = await fetch(
+        "http://travellingnorth.ca/MVA/public/api/clients",
+        requestOptions
+      );
+      const result = await resp.json();
+      setClientData(result);
+      console.log("client information---", result);
+    } catch (err) {
+      navigate("/");
+      console.error("client--", err, "status----", err.status);
+    }
+  };
+
   return (
     <div className="flex">
       <Sidenav
@@ -46,7 +74,7 @@ function Dashboard() {
       />
       <div className="w-full h-screen overflow-y-scroll">
         <Header />
-        {openMenu === "dashboard" ? (
+        {openMenu === "dashboard" || openMenu === "applicant" ? (
           <div className="dashboard-main-div grid grid-cols-12">
             <div className="col-span-9 px-5 pb-5">
               <div className="search-dropdown-filter-main-div pb-5 ">
@@ -98,156 +126,83 @@ function Dashboard() {
                 <table className="w-full my-5">
                   <thead className="bg-[#1c8eeb]">
                     <tr className="grid grid-cols-12 px-3 py-2">
-                      <td className="uppercase text-xs text-white col-span-1">
-                        {" "}
-                        Files
-                      </td>
-                      <td className="uppercase text-xs text-center text-white col-span-2">
-                        {" "}
-                        Category
-                      </td>
-                      <td className="uppercase text-xs text-white col-span-1">
-                        {" "}
+                      <td className="uppercase text-xs text-white col-span-2">
                         Name
                       </td>
-                      <td className="uppercase text-xs text-white col-span-4">
-                        {" "}
-                        Description
+                      <td className="uppercase text-xs text-white col-span-2">
+                        Phone
+                      </td>
+                      <td className="uppercase text-xs text-white col-span-3">
+                        Email
+                      </td>
+                      <td className="uppercase text-xs text-white col-span-1">
+                        Day
+                      </td>
+                      <td className="uppercase text-xs text-center text-white col-span-2">
+                        Time
                       </td>
                       <td className="uppercase text-xs text-center text-white col-span-2">
                         {" "}
-                        Date of Closing
-                      </td>
-                      <td className="uppercase text-xs text-center text-white col-span-2">
-                        {" "}
-                        Status
+                        Action
                       </td>
                     </tr>
                   </thead>
                   <tbody className="h-48 overflow-y-scroll">
-                    <tr className="bg-white grid grid-cols-12 px-3 py-2">
-                      <td className="text-xs text-orange-600 font-bold col-span-1 flex items-center h-full">
-                        <input
-                          type="checkbox"
-                          className="-ml-8 checkboxStyle rounded-[100%] mr-3"
-                        />{" "}
-                        Doe v Poe
-                      </td>
-                      <td className="text-xs font-bold col-span-2 flex justify-center items-center h-full text-center">
-                        {" "}
-                        Sample Case
-                      </td>
-                      <td className="text-xs col-span-1 flex justify-center items-center h-full">
-                        Sample Case
-                      </td>
-                      <td className="text-xs col-span-4">
-                        {" "}
-                        discription are here you can add anything in that i am
-                        adding just for testing...
-                      </td>
-                      <td className="text-xs col-span-2 flex justify-center items-center h-full">
-                        14/11/2023
-                      </td>
-                      <td className="text-xs col-span-2 flex justify-around items-center h-full">
-                        <div className="flex justify-around bg-green-300 uppercase text-xs px-2 py-1 rounded-full">
-                        <GoDotFill className="text-green-500 text-lg" /> Active
-                        </div>
-                        <CiMenuKebab className="text-lg" />
-                      </td>
-                    </tr>
-                    <tr className="bg-[#f5f5ff] grid grid-cols-12 px-3 py-2">
-                      <td className="text-xs text-orange-600 font-bold col-span-1 flex items-center h-full">
-                        <input
-                          type="checkbox"
-                          className="-ml-8 checkboxStyle rounded-[100%] mr-3"
-                        />{" "}
-                        Doe v Poe
-                      </td>
-                      <td className="text-xs font-bold col-span-2 flex justify-center items-center h-full text-center">
-                        {" "}
-                        Sample Case
-                      </td>
-                      <td className="text-xs col-span-1 flex justify-center items-center h-full">
-                        Sample Case
-                      </td>
-                      <td className="text-xs col-span-4">
-                        {" "}
-                        discription are here you can add anything in that i am
-                        adding just for testing...
-                      </td>
-                      <td className="text-xs col-span-2 flex justify-center items-center h-full">
-                        14/11/2023
-                      </td>
-                      <td className="text-xs col-span-2 flex items-center h-full justify-around">
-                        <div className="flex justify-around bg-red-200 uppercase text-xs px-2 py-1 rounded-full">
-                          <GoDotFill className="text-red-500 text-lg" />   Closed
-                        </div>
-                        <CiMenuKebab className="text-lg" />
-                      </td>
-                    </tr>
-                    <tr className="bg-white grid grid-cols-12 px-3 py-2">
-                      <td className="text-xs text-orange-600 font-bold col-span-1 flex items-center h-full">
-                        <input
-                          type="checkbox"
-                          className="-ml-8 checkboxStyle rounded-[100%] mr-3"
-                        />{" "}
-                        Doe v Poe
-                      </td>
-                      <td className="text-xs font-bold col-span-2 flex justify-center items-center h-full text-center">
-                        {" "}
-                        Sample Case
-                      </td>
-                      <td className="text-xs col-span-1 flex justify-center items-center h-full">
-                        Sample Case
-                      </td>
-                      <td className="text-xs col-span-4">
-                        {" "}
-                        discription are here you can add anything in that i am
-                        adding just for testing...
-                      </td>
-                      <td className="text-xs col-span-2  flex justify-center items-center h-full">
-                        14/11/2023
-                      </td>
-                      <td className="text-xs col-span-2 flex items-center h-full justify-around">
-                        <div className="flex justify-around bg-green-300 uppercase text-xs px-2 py-1 rounded-full">
-                        <GoDotFill className="text-green-500 text-lg" /> Active
-                        </div>
-                        <CiMenuKebab className="text-lg" />
-                      </td>
-                    </tr>
-                    <tr className="bg-[#f5f5ff] grid grid-cols-12 px-3 py-2">
-                      <td className="text-xs text-orange-600 font-bold col-span-1 flex items-center h-full">
-                        <input type="checkbox" className="-ml-8 checkboxStyle mr-3" /> Doe v
-                        Poe
-                      </td>
-                      <td className="text-xs font-bold col-span-2 flex justify-center items-center h-full text-center">
-                        {" "}
-                        Sample Case
-                      </td>
-                      <td className="text-xs col-span-1 flex justify-center items-center h-full">
-                        Sample Case
-                      </td>
-                      <td className="text-xs col-span-4">
-                        {" "}
-                        discription are here you can add anything in that i am
-                        adding just for testing...
-                      </td>
-                      <td className="text-xs col-span-2 flex justify-center items-center h-full">
-                        14/11/2023
-                      </td>
-                      <td className="text-xs col-span-2 flex justify-around items-center h-full">
-                        <div className="flex justify-around bg-green-300 uppercase text-xs px-2 py-1 rounded-full">
-                        <GoDotFill className="text-green-500 text-lg" /> Active
-                        </div>
-                        <CiMenuKebab className="text-lg" />
-                      </td>
-                    </tr>
-                    <tr className="bg-white grid grid-cols-12 px-3 py-5">
-                      <td></td>
-                    </tr>
-                    <tr className="bg-[#f5f5ff] grid grid-cols-12 px-3 py-5">
-                      <td></td>
-                    </tr>
+                    {clientData.length > 0
+                      ? clientData.map((item, index) => {
+                          return (
+                            <tr
+                              key={index}
+                              className={`grid grid-cols-12 px-3 py-2 ${
+                                index % 2 === 0 ? "bg-white" : "bg-[#f5f5ff]"
+                              }`}
+                            >
+                              <td className="text-xs text-orange-600 font-bold col-span-2 flex items-center h-full">
+                                <input
+                                  type="checkbox"
+                                  className="-ml-8 checkboxStyle rounded-[100%] mr-3"
+                                />{" "}
+                                {item.first_name} {item.last_name}
+                              </td>
+                              <td className="text-xs font-bold col-span-2 flex items-center h-fullr">
+                                {item.home_telephone}
+                              </td>
+                              <td className="text-xs col-span-3 flex items-center h-full">
+                                <p className="text-ellipsis overflow-hidden">
+                                  {item.email_address}
+                                </p>
+                              </td>
+                              <td className="text-xs flex justify-center items-center col-span-1">
+                                {item.best_time_to_reach_day}
+                              </td>
+                              <td className="text-xs col-span-2 flex justify-center items-center h-full">
+                                {item.best_time_to_reach_time}
+                              </td>
+                              <td className="text-xs col-span-2 flex justify-around items-center h-full">
+                                {/* <div className="flex justify-around bg-green-300 uppercase text-xs px-2 py-1 rounded-full">
+                                  <GoDotFill className="text-green-500 text-lg" />{" "}
+                                  Active
+                                </div> */}
+                                <FaEye className="text-lg cursor-pointer text-gray-600" />
+                                <Link
+                                  to={{
+                                    pathname: `/client-information`,
+                                    search: `?slug=${item.slug}`,
+                                  }}
+                                >
+                                  <TbEdit className="text-lg cursor-pointer text-gray-600" />
+                                </Link>
+                                <a
+                                  href={`http://travellingnorth.ca/MVA/public/pdf/${item.slug}`}
+                                  target="_blanck"
+                                >
+                                  <FaFileDownload className="text-lg cursor-pointer text-gray-600" />
+                                </a>
+                              </td>
+                            </tr>
+                          );
+                        })
+                      : ""}
                     <tr className="bg-white grid grid-cols-12 px-3 py-5">
                       <td></td>
                     </tr>
@@ -384,20 +339,6 @@ function Dashboard() {
           </div>
         ) : openMenu === "calender" ? (
           "caledar"
-        ) : openMenu === "applicant" ? (
-          openSubMenu === "clientInformation" ? (
-            <ClientInformation />
-          ) : openSubMenu === "occupation" ? (
-            <Occupation />
-          ) : openSubMenu === "referral" ? (
-            <Referral />
-          ) : openSubMenu === "representative" ? (
-            <Representative />
-          ) : openSubMenu === "identification" ? (
-            <Identification />
-          ) : (
-            ""
-          )
         ) : (
           ""
         )}

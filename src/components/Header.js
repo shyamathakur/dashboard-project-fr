@@ -2,14 +2,19 @@ import React from "react";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import "./Header.css";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
   const currentDate = new Date();
-
+  const navigate = useNavigate();
   // Get the current hour, minute, and second
   const currentHour = currentDate.getHours();
   const currentMinute = currentDate.getMinutes();
   const currentSecond = currentDate.getSeconds();
+  const LogOut = () => {
+    localStorage.clear();
+    navigate("/");
+  };
   return (
     <div className="sticky top-0 bg-white z-50 grid grid-cols-12 py-3 shadow-md">
       <div className="flex col-span-4">
@@ -53,13 +58,16 @@ function Header() {
           />
         </div>
         <select className="dropdown">
-          <option>
+          <option className="p-0">
             <RiArrowDropDownLine />
           </option>
-          <option> setting </option>
-          <option> help </option>
-          <option> profile </option>
-          <option> other </option>
+          <option className="px-2 py-1"> setting </option>
+          <option className="px-2 py-1"> help </option>
+          <option className="px-2 py-1"> profile </option>
+          <option className="px-2 py-1" onClick={() => LogOut()}>
+            {" "}
+            Logout{" "}
+          </option>
         </select>
       </div>
     </div>

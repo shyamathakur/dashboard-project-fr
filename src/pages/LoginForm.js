@@ -6,26 +6,35 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const LoginHandler = async () => {
-    var formdata = new FormData();
-    formdata.append("email", email);
-    formdata.append("password", password);
-    try {
-      const resp = await fetch(
-        "http://travellingnorth.ca/MVA/public/api/login",
-        {
-          method: "POST",
-          body: formdata,
+    if (email === "") {
+      alert("Please Enter Email");
+    } else if (password === "") {
+      alert("Please Enter Password");
+    } else {
+      var formdata = new FormData();
+      formdata.append("email", email);
+      formdata.append("password", password);
+      try {
+        const resp = await fetch(
+          "http://travellingnorth.ca/MVA/public/api/login",
+          {
+            method: "POST",
+            body: formdata,
+          }
+        );
+        const result = await resp.json();
+        console.log(result.token)
+        if (result.token !== "" && result.token !== undefined) {
+          localStorage.setItem("token", result.token);
+          alert("Login successfull..!");
+          navigate("/dashboard");
+        }else{
+          alert(result.error)
         }
-      );
-      const result = await resp.json();
-      if (result.token !== "") {
-        localStorage.setItem("token", result.token);
-        alert("Login successfull..!");
-        navigate("/");
+        console.log("login---", result);
+      } catch (err) {
+        console.error(err);
       }
-      console.log("login---", result);
-    } catch (err) {
-      console.error(err);
     }
   };
   return (
