@@ -1,0 +1,172 @@
+.login-main-div {
+  background-image: url(./logn-back.jpeg);
+  height: 695px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.login-navbar {
+  height: 90px;
+  justify-content: space-between;
+  padding: 40px;
+  align-items: center;
+  display: flex;
+}
+
+.options-navbar {
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+}
+
+.login-navbar-search {
+  padding: 5px 10px;
+  border-radius: 16px;
+  width: 215px;
+}
+
+.login-form-logo {
+  color: white;
+  font-size: 24px;
+}
+
+.options-navbar p {
+  color: white;
+}
+
+.login-form-main-div {
+  display: flex;
+  padding: 40px;
+  justify-content: space-around;
+}
+
+.form-div-child {
+  width: 40%;
+}
+.form-div-child-signup {
+  width: 70%;
+}
+
+.text-form-div-child {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.werlcome-galaxy {
+  color: white;
+  font-size: 30px;
+}
+
+.book-appointment {
+  background-color: #f3542c;
+  border-radius: 15px;
+  margin-top: 40px;
+  padding: 8px 14px;
+  color: white;
+}
+
+.welcome-ipsum-text {
+  margin-top: 30px;
+  color: white;
+}
+
+.form-div {
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px;
+  width: 480px;
+  height: 450px;
+}
+.form-div-signup {
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px;
+  width: 100%;
+
+}
+
+.create-accound-div {
+  padding: 35px;
+  color: white;
+  background-image: url(./login.jpg);
+  background-color: #cccccc;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.CREATR-ACCOUNT {
+  margin-top: 3rem;
+}
+
+.user-account-p-text {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.remember-p {
+  padding-left: 5px;
+}
+
+.user-login {
+  background-color: white;
+  padding: 35px;
+}
+
+.user-heading {
+  text-align: center;
+  font-size: 17px;
+  color: #2886c6;
+}
+
+.button-login-div {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.button-login-form {
+  background-color: #1f539e;
+  padding: 5px 20px;
+  color: white;
+  border-radius: 10px;
+}
+
+.input-login {
+  border-radius: 10px;
+  border: none;
+  align-items: center;
+  display: flex;
+  padding-left: 20px;
+  color: white;
+  height: 32px;
+  width: 270px;
+  background-color: #2886c6;
+}
+
+.input-login::placeholder {
+  color: white;
+}
+
+.input-div {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.remember-pass-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 3.5rem;
+}
+
+.child-div {
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+  /* margin: 50px auto; */
+  margin-top: 6rem;
+}
