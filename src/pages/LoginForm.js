@@ -80,7 +80,7 @@ function LoginForm() {
                   onChange={(e) => setEmail(e.target.value)}
                   className="input-login"
                   type="text"
-                  placeholder="Username"
+                  placeholder="Email"
                 />
               </div>
               <div className="input-div">
