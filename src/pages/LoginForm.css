@@ -7,6 +7,15 @@
   position: relative;
 }
 
+.signup-main-div {
+  background-image: url(./logn-back.jpeg);
+  /* height: 695px; */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
 .login-navbar {
   height: 90px;
   justify-content: space-between;
@@ -39,6 +48,11 @@
 .login-form-main-div {
   display: flex;
   padding: 40px;
+  justify-content: space-around;
+}
+.signup-form-main-div {
+  display: flex;
+  padding: 80px 40px;
   justify-content: space-around;
 }
 
@@ -82,7 +96,6 @@
 .form-div-signup {
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px;
   width: 100%;
-
 }
 
 .create-accound-div {

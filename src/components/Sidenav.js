@@ -27,9 +27,8 @@ function Sidenav({ openMenu, setOpenMenu, openSubMenu, setOpenSubMenu }) {
         <Link to="/dashboard">
           <p
             onClick={() => setOpenMenu("dashboard")}
-            className={`text-sm ${
-              openMenu === "dashboard" ? "bg-white text-black" : "text-white"
-            }    flex px-4 py-2 gap-x-3 items-center rounded-l-full cursor-pointer`}
+            className={`text-sm ${openMenu === "dashboard" ? "bg-white text-black" : "text-white"
+              }    flex px-4 py-2 gap-x-3 items-center rounded-l-full cursor-pointer`}
           >
             <FiHome />
             Dashboard
@@ -37,25 +36,22 @@ function Sidenav({ openMenu, setOpenMenu, openSubMenu, setOpenSubMenu }) {
         </Link>
         <p
           onClick={() => setOpenMenu("files")}
-          className={`text-sm ${
-            openMenu === "files" ? "bg-white text-black" : "text-white"
-          }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer my-2`}
+          className={`text-sm ${openMenu === "files" ? "bg-white text-black" : "text-white"
+            }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer my-2`}
         >
           <VscFileSubmodule /> Files
         </p>
         <p
           onClick={() => setOpenMenu("reports")}
-          className={`text-sm ${
-            openMenu === "reports" ? "bg-white text-black" : "text-white"
-          }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer my-2`}
+          className={`text-sm ${openMenu === "reports" ? "bg-white text-black" : "text-white"
+            }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer my-2`}
         >
           <FiFileText /> Reports
         </p>
         <p
           onClick={() => setOpenMenu("calendar")}
-          className={`text-sm transition duration-300 ease-linear ${
-            openMenu === "calendar" ? "bg-white text-black" : "text-white"
-          }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer mt-2`}
+          className={`text-sm transition duration-300 ease-linear ${openMenu === "calendar" ? "bg-white text-black" : "text-white"
+            }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer mt-2`}
         >
           <IoCalendarNumberOutline /> Calendar
         </p>
@@ -79,11 +75,10 @@ function Sidenav({ openMenu, setOpenMenu, openSubMenu, setOpenSubMenu }) {
             <Link to="/client-information">
               <p
                 onClick={() => setOpenSubMenu("clientInformation")}
-                className={`text-sm transition duration-300 ease-linear ${
-                  openSubMenu === "clientInformation"
-                    ? "bg-white text-black"
-                    : "text-white"
-                }    flex pl-4 py-2 gap-x-2  items-center rounded-l-full cursor-pointer mt-2`}
+                className={`text-sm transition duration-300 ease-linear ${openSubMenu === "clientInformation"
+                  ? "bg-white text-black"
+                  : "text-white"
+                  }    flex pl-4 py-2 gap-x-2  items-center rounded-l-full cursor-pointer mt-2`}
               >
                 <IoIosInformationCircle /> Client Information
               </p>
@@ -92,22 +87,20 @@ function Sidenav({ openMenu, setOpenMenu, openSubMenu, setOpenSubMenu }) {
               <Link to="/identification">
                 <p
                   onClick={() => setOpenSubMenu("identification")}
-                  className={`text-sm transition duration-300 ease-linear ${
-                    openSubMenu === "identification"
-                      ? "bg-white text-black"
-                      : "text-white"
-                  }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer mt-2`}
+                  className={`text-sm transition duration-300 ease-linear ${openSubMenu === "identification"
+                    ? "bg-white text-black"
+                    : "text-white"
+                    }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer mt-2`}
                 >
                   <HiOutlineIdentification /> Identification
                 </p>
               </Link>
             ) : (
               <p
-                className={`text-sm transition duration-300 ease-linear opacity-50 ${
-                  openSubMenu === "identification"
-                    ? "bg-white text-black"
-                    : "text-white"
-                }    flex px-4 py-2 gap-x-3  items-center rounded-l-full mt-2`}
+                className={`text-sm transition duration-300 ease-linear opacity-50 ${openSubMenu === "identification"
+                  ? "bg-white text-black"
+                  : "text-white"
+                  }    flex px-4 py-2 gap-x-3  items-center rounded-l-full mt-2`}
               >
                 <HiOutlineIdentification /> Identification
               </p>
@@ -117,22 +110,20 @@ function Sidenav({ openMenu, setOpenMenu, openSubMenu, setOpenSubMenu }) {
               <Link to="/occupation">
                 <p
                   onClick={() => setOpenSubMenu("occupation")}
-                  className={`text-sm transition duration-300 ease-linear ${
-                    openSubMenu === "occupation"
-                      ? "bg-white text-black"
-                      : "text-white"
-                  }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer mt-2`}
+                  className={`text-sm transition duration-300 ease-linear ${openSubMenu === "occupation"
+                    ? "bg-white text-black"
+                    : "text-white"
+                    }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer mt-2`}
                 >
                   <FaBagShopping /> Occupation
                 </p>
               </Link>
             ) : (
               <p
-                className={`text-sm transition duration-300 ease-linear opacity-50 ${
-                  openSubMenu === "occupation"
-                    ? "bg-white text-black"
-                    : "text-white"
-                }    flex px-4 py-2 gap-x-3  items-center rounded-l-full mt-2`}
+                className={`text-sm transition duration-300 ease-linear opacity-50 ${openSubMenu === "occupation"
+                  ? "bg-white text-black"
+                  : "text-white"
+                  }    flex px-4 py-2 gap-x-3  items-center rounded-l-full mt-2`}
               >
                 <FaBagShopping /> Occupation
               </p>
@@ -141,64 +132,77 @@ function Sidenav({ openMenu, setOpenMenu, openSubMenu, setOpenSubMenu }) {
               <Link to="/representative">
                 <p
                   onClick={() => setOpenSubMenu("representative")}
-                  className={`text-sm transition duration-300 ease-linear ${
-                    openSubMenu === "representative"
-                      ? "bg-white text-black"
-                      : "text-white"
-                  }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer mt-2`}
+                  className={`text-sm transition duration-300 ease-linear ${openSubMenu === "representative"
+                    ? "bg-white text-black"
+                    : "text-white"
+                    }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer mt-2`}
                 >
                   <RiPresentationFill /> Representative
                 </p>
               </Link>
             ) : (
               <p
-                className={`text-sm transition duration-300 ease-linear opacity-50 ${
-                  openSubMenu === "representative"
-                    ? "bg-white text-black"
-                    : "text-white"
-                }    flex px-4 py-2 gap-x-3  items-center rounded-l-full mt-2`}
+                className={`text-sm transition duration-300 ease-linear opacity-50 ${openSubMenu === "representative"
+                  ? "bg-white text-black"
+                  : "text-white"
+                  }    flex px-4 py-2 gap-x-3  items-center rounded-l-full mt-2`}
               >
                 <RiPresentationFill /> Representative
               </p>
             )}
-              {slug ? (
-            <Link to="/referral" className="cursor-not-allowed">
-              <p
-                onClick={() => setOpenSubMenu("referral")}
-                className={`text-sm transition duration-300 ease-linear ${
-                  openSubMenu === "referral"
+            {slug ? (
+              <Link to="/referral" className="cursor-not-allowed">
+                <p
+                  onClick={() => setOpenSubMenu("referral")}
+                  className={`text-sm transition duration-300 ease-linear ${openSubMenu === "referral"
                     ? "bg-white text-black"
                     : "text-white"
-                }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer mt-2`}
+                    }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer mt-2`}
+                >
+                  <FaUsers /> Referral
+                </p>
+              </Link>) : <p
+                className={`text-sm transition duration-300 ease-linear opacity-50 ${openSubMenu === "referral"
+                  ? "bg-white text-black"
+                  : "text-white"
+                  }    flex px-4 py-2 gap-x-3  items-center rounded-l-full mt-2`}
               >
-                <FaUsers /> Referral
-              </p>
-            </Link>):<p
-                className={`text-sm transition duration-300 ease-linear opacity-50 ${
-                  openSubMenu === "referral"
+              <FaUsers /> Referral
+            </p>}
+            {slug ? (
+              <Link to="/income" className="cursor-not-allowed">
+                <p
+                  onClick={() => setOpenSubMenu("income")} 
+                  className={`text-sm transition duration-300 ease-linear ${openSubMenu === "income"
                     ? "bg-white text-black"
                     : "text-white"
-                }    flex px-4 py-2 gap-x-3  items-center rounded-l-full mt-2`}
+                    }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer mt-2`}
+                >
+                  <FaUsers /> income
+                </p>
+              </Link>) : <p
+                className={`text-sm transition duration-300 ease-linear opacity-50 ${openSubMenu === "income"
+                  ? "bg-white text-black"
+                  : "text-white"
+                  }    flex px-4 py-2 gap-x-3  items-center rounded-l-full mt-2`}
               >
-                <FaUsers /> Referral
-              </p>}
+              <FaUsers /> income
+            </p>}
           </div>
         ) : null}
       </div>
       <div className=" h-full flex flex-col justify-end">
         <p
           onClick={() => setOpenMenu("setting")}
-          className={`text-sm ${
-            openMenu === "setting" ? "bg-white text-black" : "text-white"
-          }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer my-1`}
+          className={`text-sm ${openMenu === "setting" ? "bg-white text-black" : "text-white"
+            }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer my-1`}
         >
           <IoSettingsOutline /> Setting
         </p>
         <p
           onClick={() => setOpenMenu("help")}
-          className={`text-sm ${
-            openMenu === "help" ? "bg-white text-black" : "text-white"
-          }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer my-1`}
+          className={`text-sm ${openMenu === "help" ? "bg-white text-black" : "text-white"
+            }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer my-1`}
         >
           <SiHelpscout /> Help
         </p>

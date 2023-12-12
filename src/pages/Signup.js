@@ -44,7 +44,7 @@ function Signup() {
 
     try {
       const resp = await fetch(
-        "https://travellingnorth.ca/MVA/public/api/organizations",
+        "http://travellingnorth.ca/MVA/public/api/organizations",
         {
           method: "POST",
           body: formdata,
@@ -61,15 +61,15 @@ function Signup() {
   };
   console.log("sdfsd", firmName);
   return (
-    <div className="login-main-div">
-      <div className="login-form-main-div">
+    <div className="signup-main-div">
+      <div className="signup-form-main-div">
         <div className="form-div-child-signup">
           <div className="form-div-signup">
             <div className="user-login">
               <p className="user-heading">
-                <strong>Registration</strong>
+                <strong className="text-[25px]">Registration</strong>
               </p>
-              <div className="grid grid-cols-3">
+              <div className="grid grid-cols-3 mt-2">
                 <div className="p-2">
                   <label>
                     First Name

@@ -8,6 +8,7 @@ import Identification from "./pages/Identification";
 import Referral from "./pages/Referral";
 import Representative from "./pages/Representative";
 import Occupation from "./pages/Occupation";
+import Income from "./pages/Income";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/referral" element={<Referral />} />
         <Route path="/representative" element={<Representative />} />
         <Route path="/occupation" element={<Occupation />} />
+        <Route path="/income" element={<Income />} />
       </Routes>
     </Router>
   );
