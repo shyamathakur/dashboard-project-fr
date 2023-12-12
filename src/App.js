@@ -9,6 +9,7 @@ import Referral from "./pages/Referral";
 import Representative from "./pages/Representative";
 import Occupation from "./pages/Occupation";
 import Income from "./pages/Income";
+import Insurance from './pages/Insurance'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/representative" element={<Representative />} />
         <Route path="/occupation" element={<Occupation />} />
         <Route path="/income" element={<Income />} />
+        <Route path="/insurance" element={<Insurance />} />
       </Routes>
     </Router>
   );

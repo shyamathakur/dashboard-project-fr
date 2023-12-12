@@ -178,7 +178,7 @@ function Sidenav({ openMenu, setOpenMenu, openSubMenu, setOpenSubMenu }) {
                     : "text-white"
                     }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer mt-2`}
                 >
-                  <FaUsers /> income
+                  <FaUsers /> Income
                 </p>
               </Link>) : <p
                 className={`text-sm transition duration-300 ease-linear opacity-50 ${openSubMenu === "income"
@@ -186,12 +186,31 @@ function Sidenav({ openMenu, setOpenMenu, openSubMenu, setOpenSubMenu }) {
                   : "text-white"
                   }    flex px-4 py-2 gap-x-3  items-center rounded-l-full mt-2`}
               >
-              <FaUsers /> income
+              <FaUsers /> Income
+            </p>}
+            {slug ? (
+              <Link to="/insurance" className="cursor-not-allowed">
+                <p
+                  onClick={() => setOpenSubMenu("insurance")} 
+                  className={`text-sm transition duration-300 ease-linear ${openSubMenu === "insurance"
+                    ? "bg-white text-black"
+                    : "text-white"
+                    }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer mt-2`}
+                >
+                  <FaUsers /> Insurance
+                </p>
+              </Link>) : <p
+                className={`text-sm transition duration-300 ease-linear opacity-50 ${openSubMenu === "insurance"
+                  ? "bg-white text-black"
+                  : "text-white"
+                  }    flex px-4 py-2 gap-x-3  items-center rounded-l-full mt-2`}
+              >
+              <FaUsers /> Insurance
             </p>}
           </div>
         ) : null}
       </div>
-      <div className=" h-full flex flex-col justify-end">
+      {/* <div className=" h-full flex flex-col justify-end">
         <p
           onClick={() => setOpenMenu("setting")}
           className={`text-sm ${openMenu === "setting" ? "bg-white text-black" : "text-white"
@@ -206,7 +225,7 @@ function Sidenav({ openMenu, setOpenMenu, openSubMenu, setOpenSubMenu }) {
         >
           <SiHelpscout /> Help
         </p>
-      </div>
+      </div> */}
     </div>
   );
 }
