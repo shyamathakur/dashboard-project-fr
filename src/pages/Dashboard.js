@@ -157,14 +157,14 @@ function Dashboard() {
                                 index % 2 === 0 ? "bg-white" : "bg-[#f5f5ff]"
                               }`}
                             >
-                              <td className="text-xs text-orange-600 font-bold col-span-2 flex items-center h-full">
+                              <td className="text-xs text-orange-500 col-span-2 flex items-center h-full">
                                 <input
                                   type="checkbox"
                                   className="-ml-8 checkboxStyle rounded-[100%] mr-3"
                                 />{" "}
                                 {item.first_name} {item.last_name}
                               </td>
-                              <td className="text-xs font-bold col-span-2 flex items-center h-fullr">
+                              <td className="text-xs col-span-2 flex items-center h-fullr">
                                 {item.home_telephone}
                               </td>
                               <td className="text-xs col-span-3 flex items-center h-full">
@@ -203,21 +203,6 @@ function Dashboard() {
                           );
                         })
                       : ""}
-                    <tr className="bg-white grid grid-cols-12 px-3 py-5">
-                      <td></td>
-                    </tr>
-                    <tr className="bg-[#f5f5ff] grid grid-cols-12 px-3 py-5">
-                      <td></td>
-                    </tr>
-                    <tr className="bg-white grid grid-cols-12 px-3 py-5">
-                      <td></td>
-                    </tr>
-                    <tr className="bg-[#f5f5ff] grid grid-cols-12 px-3 py-5">
-                      <td></td>
-                    </tr>
-                    <tr className="bg-white grid grid-cols-12 px-3 py-5">
-                      <td></td>
-                    </tr>
                   </tbody>
                 </table>
               </div>

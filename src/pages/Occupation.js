@@ -59,10 +59,10 @@ function Occupation() {
       error.jobPeriod = "Please enter job period";
     }
     if (jobFrom === "") {
-      error.jobFrom = "Please enter job from";
+      error.jobFrom = "Please select date";
     }
     if (jobTo === "") {
-      error.jobTo = "Please enter job to";
+      error.jobTo = "Please select date";
     }
 
     setErrors(error);
@@ -102,9 +102,9 @@ function Occupation() {
         );
         const result = await resp.json();
 
-        if (result) {
+        if (result.message==='Occupation created successfully') {
           // localStorage.setItem("slug", result.slug);
-          alert("Occupation created Successfully..!");
+          alert(result.message);
         }
         console.log("Occupation---", result);
       } catch (err) {
@@ -140,6 +140,9 @@ function Occupation() {
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Employer Name"
               />
+                {errors.employerName && (
+                <p className="text-red-500 text-sm">{errors.employerName}</p>
+              )}
             </div>
             <div className="col-span-3 p-2">
               <label>
@@ -337,6 +340,9 @@ function Occupation() {
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="eg: Job Period"
               />
+                {errors.jobPeriod && (
+                <p className="text-red-500 text-sm">{errors.jobPeriod}</p>
+              )}
             </div>
             <div className="col-span-3 p-2">
               <label>
@@ -346,10 +352,13 @@ function Occupation() {
               <input
                 value={jobFrom}
                 onChange={(e) => setJobFrom(e.target.value)}
-                type="text"
+                type="date"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="eg: From"
               />
+                {errors.jobFrom && (
+                <p className="text-red-500 text-sm">{errors.jobFrom}</p>
+              )}
             </div>
             <div className="col-span-3 p-2">
               <label>
@@ -359,10 +368,13 @@ function Occupation() {
               <input
                 value={jobTo}
                 onChange={(e) => setJobTo(e.target.value)}
-                type="text"
+                type="date"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="eg: To"
               />
+                {errors.jobTo && (
+                <p className="text-red-500 text-sm">{errors.jobTo}</p>
+              )}
             </div>
           </div>
           <div className="flex justify-center pt-5">

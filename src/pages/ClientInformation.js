@@ -56,7 +56,11 @@ const ClientInformation = (props) => {
       setLanguage(clientData.language_spoken);
       setCanBeReached(clientData.can_be_reached);
       setDay(clientData.best_time_to_reach_day);
-      setTime(clientData.best_time_to_reach_time);
+      setTime(
+        `${clientData.best_time_to_reach_time.split(":")[0]}:${
+          clientData.best_time_to_reach_time.split(":")[1]
+        }`
+      );
     }
   }, [clientData]);
 
