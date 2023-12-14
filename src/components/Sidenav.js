@@ -13,6 +13,10 @@ import { IoIosInformationCircle } from "react-icons/io";
 import { FaFolder } from "react-icons/fa";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
 import { IoIosArrowDropupCircle } from "react-icons/io";
+import { MdStayPrimaryPortrait } from "react-icons/md";
+import { GiReceiveMoney } from "react-icons/gi";
+import { GiPayMoney } from "react-icons/gi";
+import { GiPodiumSecond } from "react-icons/gi";
 import { Link } from "react-router-dom";
 
 function Sidenav({ openMenu, setOpenMenu, openSubMenu, setOpenSubMenu }) {
@@ -172,13 +176,13 @@ function Sidenav({ openMenu, setOpenMenu, openSubMenu, setOpenSubMenu }) {
             {slug ? (
               <Link to="/income" className="cursor-not-allowed">
                 <p
-                  onClick={() => setOpenSubMenu("income")} 
+                  onClick={() => setOpenSubMenu("income")}
                   className={`text-sm transition duration-300 ease-linear ${openSubMenu === "income"
                     ? "bg-white text-black"
                     : "text-white"
                     }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer mt-2`}
                 >
-                  <FaUsers /> Income
+                  <GiReceiveMoney /> Income
                 </p>
               </Link>) : <p
                 className={`text-sm transition duration-300 ease-linear opacity-50 ${openSubMenu === "income"
@@ -186,18 +190,18 @@ function Sidenav({ openMenu, setOpenMenu, openSubMenu, setOpenSubMenu }) {
                   : "text-white"
                   }    flex px-4 py-2 gap-x-3  items-center rounded-l-full mt-2`}
               >
-              <FaUsers /> Income
+              <GiReceiveMoney /> Income
             </p>}
             {slug ? (
               <Link to="/insurance" className="cursor-not-allowed">
                 <p
-                  onClick={() => setOpenSubMenu("insurance")} 
+                  onClick={() => setOpenSubMenu("insurance")}
                   className={`text-sm transition duration-300 ease-linear ${openSubMenu === "insurance"
                     ? "bg-white text-black"
                     : "text-white"
                     }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer mt-2`}
                 >
-                  <FaUsers /> Insurance
+                  <GiPayMoney /> Insurance
                 </p>
               </Link>) : <p
                 className={`text-sm transition duration-300 ease-linear opacity-50 ${openSubMenu === "insurance"
@@ -205,7 +209,45 @@ function Sidenav({ openMenu, setOpenMenu, openSubMenu, setOpenSubMenu }) {
                   : "text-white"
                   }    flex px-4 py-2 gap-x-3  items-center rounded-l-full mt-2`}
               >
-              <FaUsers /> Insurance
+              <GiPayMoney /> Insurance
+            </p>}
+            {slug ? (
+              <Link to="/PrimaryEhc" className="cursor-not-allowed">
+                <p
+                  onClick={() => setOpenSubMenu("PrimaryEhc")}
+                  className={`text-sm transition duration-300 ease-linear ${openSubMenu === "PrimaryEhc"
+                    ? "bg-white text-black"
+                    : "text-white"
+                    }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer mt-2`}
+                >
+                  <MdStayPrimaryPortrait /> PrimaryEhc
+                </p>
+              </Link>) : <p
+                className={`text-sm transition duration-300 ease-linear opacity-50 ${openSubMenu === "PrimaryEhc"
+                  ? "bg-white text-black"
+                  : "text-white"
+                  }    flex px-4 py-2 gap-x-3  items-center rounded-l-full mt-2`}
+              >
+              <MdStayPrimaryPortrait /> PrimaryEhc
+            </p>}
+            {slug ? (
+              <Link to="/secondaryEhc" className="cursor-not-allowed">
+                <p
+                  onClick={() => setOpenSubMenu("secondaryEhc")}
+                  className={`text-sm transition duration-300 ease-linear ${openSubMenu === "secondaryEhc"
+                    ? "bg-white text-black"
+                    : "text-white"
+                    }    flex px-4 py-2 gap-x-3  items-center rounded-l-full cursor-pointer mt-2`}
+                >
+                  <GiPodiumSecond /> SecondaryEhc
+                </p>
+              </Link>) : <p
+                className={`text-sm transition duration-300 ease-linear opacity-50 ${openSubMenu === "secondaryEhc"
+                  ? "bg-white text-black"
+                  : "text-white"
+                  }    flex px-4 py-2 gap-x-3  items-center rounded-l-full mt-2`}
+              >
+              <GiPodiumSecond /> SecondaryEhc
             </p>}
           </div>
         ) : null}
