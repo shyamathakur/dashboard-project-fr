@@ -186,8 +186,7 @@ function Dashboard() {
                                 <FaEye className="text-lg cursor-pointer text-gray-600" />
                                 <Link
                                   to={{
-                                    pathname: `/client-information`,
-                                    search: `?slug=${item.slug}`,
+                                    pathname: `/client-information/${item.slug}`,
                                   }}
                                 >
                                   <TbEdit className="text-lg cursor-pointer text-gray-600" />

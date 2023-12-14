@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Sidenav from "../components/Sidenav";
 import Header from "../components/Header";
+import { useParams } from "react-router-dom";
 
 function Insurance() {
   const [openMenu, setOpenMenu] = useState("applicant");
@@ -55,7 +56,7 @@ function Insurance() {
   const [thirdPartyNote, setThirdPartyNote] = useState("");
   const [errors, setErrors] = useState({});
   const token = localStorage.getItem("token");
-  const slug = localStorage.getItem("slug");
+  const { slug } = useParams();
   const validateForm = () => {
     const error = {};
     // if (income === "" || income === undefined) {
@@ -128,7 +129,6 @@ function Insurance() {
         const result = await resp.json();
 
         if (result.message === "Insurance created successfully") {
-          // localStorage.setItem("slug", result.slug);
           alert(result.message);
         } else {
           alert("something went wrong!");

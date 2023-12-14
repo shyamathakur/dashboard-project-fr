@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Sidenav from "../components/Sidenav";
 import Header from "../components/Header";
+import { useParams } from "react-router-dom";
 
-const ClientInformation = () => {
+const OtherIncome = () => {
   const [openMenu, setOpenMenu] = useState("applicant");
   const [openSubMenu, setOpenSubMenu] = useState("income");
   const [income, setIncome] = useState("");
@@ -11,7 +12,8 @@ const ClientInformation = () => {
   const [incomePeriod, setIncomePeriod] = useState("");
   const [error, setError] = useState({});
   const token = localStorage.getItem("token");
-  const slug = localStorage.getItem("slug");
+  const { slug } = useParams();
+
   const validateForm = () => {
     const error = {};
     if (income === "" || income === undefined) {
@@ -57,7 +59,6 @@ const ClientInformation = () => {
         const result = await resp.json();
 
         if (result.message === "OtherIncome created successfully") {
-          // localStorage.setItem("slug", result.slug);
           alert(result.message);
         }
         console.log("other income---", result);
@@ -180,4 +181,4 @@ const ClientInformation = () => {
   );
 };
 
-export default ClientInformation;
+export default OtherIncome;

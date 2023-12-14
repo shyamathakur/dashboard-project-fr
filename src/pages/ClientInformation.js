@@ -198,7 +198,6 @@ const ClientInformation = (props) => {
         const result = await resp.json();
 
         if (result) {
-          localStorage.setItem("slug", result.slug);
           alert("Client Create Successfully..!");
           navigate("/dashboard");
         }

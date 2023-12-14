@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import "./Header.css";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 function Header() {
   const currentDate = new Date();
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
   // Get the current hour, minute, and second
   const currentHour = currentDate.getHours();
   const currentMinute = currentDate.getMinutes();
@@ -15,6 +16,11 @@ function Header() {
     localStorage.clear();
     navigate("/");
   };
+  useEffect(() => {
+    if (!token) {
+      navigate("/");
+    }
+  }, [token]);
   return (
     <div className="sticky top-0 bg-white z-50 grid grid-cols-12 py-3 shadow-md">
       <div className="flex col-span-4">

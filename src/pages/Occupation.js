@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Sidenav from "../components/Sidenav";
 import Header from "../components/Header";
+import { useParams } from "react-router-dom";
 
 function Occupation() {
   const [openAddressBox, setOpenAddressBox] = useState(false);
@@ -21,7 +22,7 @@ function Occupation() {
   const [jobTo, setJobTo] = useState("");
   const [errors, setErrors] = useState({});
   const token = localStorage.getItem("token");
-  const slug = localStorage.getItem("slug");
+  const { slug } = useParams();
 
   const validateForm = () => {
     const error = {};
@@ -103,7 +104,6 @@ function Occupation() {
         const result = await resp.json();
 
         if (result.message==='Occupation created successfully') {
-          // localStorage.setItem("slug", result.slug);
           alert(result.message);
         }
         console.log("Occupation---", result);
