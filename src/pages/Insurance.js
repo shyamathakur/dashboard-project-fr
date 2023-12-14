@@ -6,14 +6,142 @@ function Insurance() {
   const [openMenu, setOpenMenu] = useState("applicant");
   const [openSubMenu, setOpenSubMenu] = useState("insurance");
   const [openAddressBox, setOpenAddressBox] = useState(false);
+  const [openAddressBoxThirdParty, setOpenAddressBoxThirdParty] =
+    useState(false);
+  const [isPolicyHolderSame, setIsPolicyHolderSame] = useState("");
+  const [policyHolder, setPolicyHolder] = useState("");
+  const [insuranceCompany, setInsuranceCompany] = useState("");
   const [unitNumber, setUnitNumber] = useState("");
   const [streetNumber, setStreetNumber] = useState("");
   const [streetName, setstreetName] = useState("");
   const [city, setCity] = useState("");
   const [province, setProvince] = useState("");
   const [postalCode, setPostalCode] = useState("");
-  const [errors, setErrors] = useState({});
+  const [claimNo, setClaimNo] = useState("");
+  const [policyNo, setPolicyNo] = useState("");
+  const [adjusterCompany, setAdjusterCompany] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [faxNumber, setFaxNumber] = useState("");
+  const [tollFree, setTollFree] = useState("");
+  const [ext, setExt] = useState("");
+  const [note, setNote] = useState("");
 
+  //third party
+  const [thirdPartyIsPolicyHolderSame, setThirdPartyIsPolicyHolderSame] =
+    useState("");
+  const [thirdPartyPolicyHolder, setThirdPartyPolicyHolder] = useState("");
+  const [thirdPartyInsuranceCompany, setThirdPartyInsuranceCompany] =
+    useState("");
+  const [thirdPartyUnitNumber, setThirdPartyUnitNumber] = useState("");
+  const [thirdPartyStreetNumber, setThirdPartyStreetNumber] = useState("");
+  const [thirdPartyStreetName, setThirdPartystreetName] = useState("");
+  const [thirdPartyCity, setThirdPartyCity] = useState("");
+  const [thirdPartyProvince, setThirdPartyProvince] = useState("");
+  const [thirdPartyPostalCode, setThirdPartyPostalCode] = useState("");
+  const [thirdPartyClaimNo, setThirdPartyClaimNo] = useState("");
+  const [thirdPartyPolicyNo, setThirdPartyPolicyNo] = useState("");
+  const [thirdPartyAdjusterCompany, setThirdPartyAdjusterCompany] =
+    useState("");
+  const [thirdPartyFirstName, setThirdPartyFirstName] = useState("");
+  const [thirdPartyLastName, setThirdPartyLastName] = useState("");
+  const [thirdPartyPhone, setThirdPartyPhone] = useState("");
+  const [thirdPartyEmail, setThirdPartyEmail] = useState("");
+  const [thirdPartyFaxNumber, setThirdPartyFaxNumber] = useState("");
+  const [thirdPartyTollFree, setThirdPartyTollFree] = useState("");
+  const [thirdPartyExt, setThirdPartyExt] = useState("");
+  const [thirdPartyNote, setThirdPartyNote] = useState("");
+  const [errors, setErrors] = useState({});
+  const token = localStorage.getItem("token");
+  const slug = localStorage.getItem("slug");
+  const validateForm = () => {
+    const error = {};
+    // if (income === "" || income === undefined) {
+    //   error.income = "Please enter Other Income";
+    // }
+
+    setErrors(error);
+    return Object.keys(error).length === 0;
+  };
+
+  const CreateInsurance = async () => {
+    if (validateForm()) {
+      const myHeaders = new Headers();
+      myHeaders.append("Authorization", `Bearer ${token}`);
+      myHeaders.append("ContentType", "application/json");
+
+      const formdata = new FormData();
+      formdata.append("policy_holder_same", isPolicyHolderSame);
+      formdata.append("policy_holder", policyHolder);
+      formdata.append("insurance_company", insuranceCompany);
+      formdata.append("unit_number", unitNumber);
+      formdata.append("street_number", streetNumber);
+      formdata.append("street_name", streetName);
+      formdata.append("city", city);
+      formdata.append("province", province);
+      formdata.append("postal_code", postalCode);
+      formdata.append("claim_no", claimNo);
+      formdata.append("policy_no", policyNo);
+      formdata.append("adjuster_company", adjusterCompany);
+      formdata.append("first_name", firstName);
+      formdata.append("last_name", lastName);
+      formdata.append("toll_free", tollFree);
+      formdata.append("telephone", phone);
+      formdata.append("ext", ext);
+      formdata.append("fax", faxNumber);
+      formdata.append("email", email);
+      formdata.append("note", note);
+      formdata.append("t_policy_holder_same", thirdPartyIsPolicyHolderSame);
+      formdata.append("t_policy_holder", thirdPartyPolicyHolder);
+      formdata.append("t_insurance_company", thirdPartyInsuranceCompany);
+      formdata.append("t_unit_number", thirdPartyUnitNumber);
+      formdata.append("t_street_number", thirdPartyStreetNumber);
+      formdata.append("t_street_name", thirdPartyStreetName);
+      formdata.append("t_city", thirdPartyCity);
+      formdata.append("t_province", thirdPartyProvince);
+      formdata.append("t_postal_code", thirdPartyPostalCode);
+      formdata.append("t_claim_no", thirdPartyClaimNo);
+      formdata.append("t_policy_no", thirdPartyPolicyNo);
+      formdata.append("t_adjuster_company", thirdPartyAdjusterCompany);
+      formdata.append("t_first_name", thirdPartyFirstName);
+      formdata.append("t_last_name", thirdPartyLastName);
+      formdata.append("t_toll_free", thirdPartyTollFree);
+      formdata.append("t_telephone", thirdPartyPhone);
+      formdata.append("t_ext", thirdPartyExt);
+      formdata.append("t_fax", thirdPartyFaxNumber);
+      formdata.append("t_email", thirdPartyEmail);
+      formdata.append("t_note", thirdPartyNote);
+
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: formdata,
+      };
+
+      try {
+        const resp = await fetch(
+          `https://travellingnorth.ca/MVA/public/api/insurance/${slug}`,
+          requestOptions
+        );
+        const result = await resp.json();
+
+        if (result.message === "Insurance created successfully") {
+          // localStorage.setItem("slug", result.slug);
+          alert(result.message);
+        } else {
+          alert("something went wrong!");
+        }
+        console.log("Insurance---", result);
+      } catch (err) {
+        alert(err.message)
+        console.error("Insurance--", err);
+      }
+    }
+  };
+
+  // not completed fullyyy.....!!!!
   return (
     <div className="flex">
       <Sidenav
@@ -39,57 +167,66 @@ function Insurance() {
               </label>
               <div className="flex justify-start pt-2">
                 <input
-                  // onChange={(e) => setFirstName(e.target.value)}
-                  // value={firstName}
+                  onChange={(e) => setIsPolicyHolderSame(e.target.value)}
+                  value="Yes"
                   type="radio"
                   className="py-1 mr-2 mt-1 text-md border border-gray-300"
                   name="policyHolder"
                 />{" "}
                 Yes
                 <input
-                  // onChange={(e) => setFirstName(e.target.value)}
-                  // value={firstName}
+                  onChange={(e) => setIsPolicyHolderSame(e.target.value)}
+                  value="No"
                   type="radio"
                   className=" py-1 mx-2 mt-1 border border-gray-300"
                   name="policyHolder"
                 />{" "}
                 No
               </div>
-              {/* {errors.firstName && (
-                <p className="text-red-500 text-sm">{errors.firstName}</p>
-              )} */}
+              {errors.isPolicyHolderSame && (
+                <p className="text-red-500 text-sm">
+                  {errors.isPolicyHolderSame}
+                </p>
+              )}
             </div>
-            <div className="col-span-3 p-2">
-              <label>
-                Policy holder name
-                <span className="text-red-600 font-bold text-md pl-1">*</span>
-              </label>
-              <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
-                type="text"
-                className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
-                placeholder="Enter Policy holder name"
-              />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
-            </div>
+            {isPolicyHolderSame === "No" ? (
+              <div className="col-span-3 p-2">
+                <label>
+                  Policy holder name
+                  <span className="text-red-600 font-bold text-md pl-1">*</span>
+                </label>
+                <input
+                  value={policyHolder}
+                  onChange={(e) => setPolicyHolder(e.target.value)}
+                  type="text"
+                  className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
+                  placeholder="Enter Policy holder name"
+                />
+                {errors.policyHolder && (
+                  <p className="text-red-500 text-sm">{errors.policyHolder}</p>
+                )}
+              </div>
+            ) : (
+              ""
+            )}
+
             <div className="col-span-3 p-2">
               <label>
                 Insurance Company
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={insuranceCompany}
+                onChange={(e) => setInsuranceCompany(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Insurance Company "
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.insuranceCompany && (
+                <p className="text-red-500 text-sm">
+                  {errors.insuranceCompany}
+                </p>
+              )}
             </div>
             <div className="col-span-3 p-2">
               <label>
@@ -97,15 +234,15 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={claimNo}
+                onChange={(e) => setClaimNo(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Claim No."
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.claimNo && (
+                <p className="text-red-500 text-sm">{errors.claimNo}</p>
+              )}
             </div>
             <div
               className="col-span-12 p-2 cursor-pointer"
@@ -249,15 +386,15 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={policyNo}
+                onChange={(e) => setPolicyNo(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Policy No"
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.policyNo && (
+                <p className="text-red-500 text-sm">{errors.policyNo}</p>
+              )}
             </div>
           </div>
           <p className="text-md upppercase mt-3 text-gray-600 py-2 bg-gray-200 px-2">
@@ -270,15 +407,15 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={adjusterCompany}
+                onChange={(e) => setAdjusterCompany(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Adjuster Company"
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.adjusterCompany && (
+                <p className="text-red-500 text-sm">{errors.adjusterCompany}</p>
+              )}
             </div>{" "}
             <div className="col-span-3 p-2">
               <label>
@@ -302,15 +439,15 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter First Name"
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.firstName && (
+                <p className="text-red-500 text-sm">{errors.firstName}</p>
+              )}
             </div>{" "}
             <div className="col-span-3 p-2">
               <label>
@@ -318,15 +455,15 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Last Name"
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.lastName && (
+                <p className="text-red-500 text-sm">{errors.lastName}</p>
+              )}
             </div>{" "}
             <div className="col-span-3 p-2">
               <label>
@@ -334,15 +471,15 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={tollFree}
+                onChange={(e) => setTollFree(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Toll free"
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.tollFree && (
+                <p className="text-red-500 text-sm">{errors.tollFree}</p>
+              )}
             </div>{" "}
             <div className="col-span-3 p-2">
               <label>
@@ -350,15 +487,15 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Telephone"
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.phone && (
+                <p className="text-red-500 text-sm">{errors.phone}</p>
+              )}
             </div>{" "}
             <div className="col-span-3 p-2">
               <label>
@@ -366,15 +503,15 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={ext}
+                onChange={(e) => setExt(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Ext"
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.ext && (
+                <p className="text-red-500 text-sm">{errors.ext}</p>
+              )}
             </div>{" "}
             <div className="col-span-3 p-2">
               <label>
@@ -382,15 +519,15 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={faxNumber}
+                onChange={(e) => setFaxNumber(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Fax"
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.faxNumber && (
+                <p className="text-red-500 text-sm">{errors.faxNumber}</p>
+              )}
             </div>{" "}
             <div className="col-span-3 p-2">
               <label>
@@ -398,15 +535,15 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Email"
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.email && (
+                <p className="text-red-500 text-sm">{errors.email}</p>
+              )}
             </div>{" "}
             <div className="col-span-3 p-2">
               <label>
@@ -414,15 +551,15 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Note"
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.note && (
+                <p className="text-red-500 text-sm">{errors.note}</p>
+              )}
             </div>
           </div>
           <p className="text-md upppercase mt-3 text-gray-600 py-2 bg-gray-200 px-2">
@@ -440,57 +577,72 @@ function Insurance() {
               </label>
               <div className="flex justify-start pt-2">
                 <input
-                  // onChange={(e) => setFirstName(e.target.value)}
-                  // value={firstName}
+                  onChange={(e) =>
+                    setThirdPartyIsPolicyHolderSame(e.target.value)
+                  }
+                  value="Yes"
                   type="radio"
                   className="py-1 mr-2 mt-1 text-md border border-gray-300"
-                  name="policyHolder"
+                  name="policyHolderT"
                 />{" "}
                 Yes
                 <input
-                  // onChange={(e) => setFirstName(e.target.value)}
-                  // value={firstName}
+                  onChange={(e) =>
+                    setThirdPartyIsPolicyHolderSame(e.target.value)
+                  }
+                  value="No"
                   type="radio"
                   className=" py-1 mx-2 mt-1 border border-gray-300"
-                  name="policyHolder"
+                  name="policyHolderT"
                 />{" "}
                 No
               </div>
-              {/* {errors.firstName && (
-                <p className="text-red-500 text-sm">{errors.firstName}</p>
-              )} */}
+              {errors.thirdPartyIsPolicyHolderSame && (
+                <p className="text-red-500 text-sm">
+                  {errors.thirdPartyIsPolicyHolderSame}
+                </p>
+              )}
             </div>
-            <div className="col-span-3 p-2">
-              <label>
-                Policy holder name
-                <span className="text-red-600 font-bold text-md pl-1">*</span>
-              </label>
-              <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
-                type="text"
-                className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
-                placeholder="Enter Policy holder name"
-              />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
-            </div>
+            {thirdPartyIsPolicyHolderSame === "No" ? (
+              <div className="col-span-3 p-2">
+                <label>
+                  Policy holder name
+                  <span className="text-red-600 font-bold text-md pl-1">*</span>
+                </label>
+                <input
+                  value={thirdPartyPolicyHolder}
+                  onChange={(e) => setThirdPartyPolicyHolder(e.target.value)}
+                  type="text"
+                  className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
+                  placeholder="Enter Policy holder name"
+                />
+                {errors.thirdPartyPolicyHolder && (
+                  <p className="text-red-500 text-sm">
+                    {errors.thirdPartyPolicyHolder}
+                  </p>
+                )}
+              </div>
+            ) : (
+              ""
+            )}
+
             <div className="col-span-3 p-2">
               <label>
                 Insurance Company
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={thirdPartyInsuranceCompany}
+                onChange={(e) => setThirdPartyInsuranceCompany(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Insurance Company "
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.thirdPartyInsuranceCompany && (
+                <p className="text-red-500 text-sm">
+                  {errors.thirdPartyInsuranceCompany}
+                </p>
+              )}
             </div>
             <div className="col-span-3 p-2">
               <label>
@@ -498,37 +650,45 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={thirdPartyClaimNo}
+                onChange={(e) => setThirdPartyClaimNo(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Claim No."
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.thirdPartyClaimNo && (
+                <p className="text-red-500 text-sm">
+                  {errors.thirdPartyClaimNo}
+                </p>
+              )}
             </div>
             <div
               className="col-span-12 p-2 cursor-pointer"
-              onClick={() => setOpenAddressBox(openAddressBox ? false : true)}
+              onClick={() =>
+                setOpenAddressBoxThirdParty(
+                  openAddressBoxThirdParty ? false : true
+                )
+              }
             >
               <label>
                 Address
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                value={`${unitNumber ? unitNumber : ""} ${
-                  streetNumber ? streetNumber : ""
-                } ${streetName ? streetName : ""} ${city ? city : ""} ${
-                  province ? province : ""
-                } ${postalCode ? postalCode : ""}`}
+                value={`${thirdPartyUnitNumber ? thirdPartyUnitNumber : ""} ${
+                  thirdPartyStreetNumber ? thirdPartyStreetNumber : ""
+                } ${thirdPartyStreetName ? thirdPartyStreetName : ""} ${
+                  thirdPartyCity ? thirdPartyCity : ""
+                } ${thirdPartyProvince ? thirdPartyProvince : ""} ${
+                  thirdPartyPostalCode ? thirdPartyPostalCode : ""
+                }`}
                 type="text"
                 readOnly
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter last name"
               />
             </div>
-            {openAddressBox ? (
+            {openAddressBoxThirdParty ? (
               <>
                 <div className="col-span-3 p-2">
                   <label>
@@ -538,14 +698,16 @@ function Insurance() {
                     </span>
                   </label>
                   <input
-                    value={unitNumber}
-                    onChange={(e) => setUnitNumber(e.target.value)}
+                    value={thirdPartyUnitNumber}
+                    onChange={(e) => setThirdPartyUnitNumber(e.target.value)}
                     type="text"
                     className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                     placeholder="Enter Unit Number "
                   />
-                  {errors.unitNumber && (
-                    <p className="text-red-500 text-sm">{errors.unitNumber}</p>
+                  {errors.thirdPartyUnitNumber && (
+                    <p className="text-red-500 text-sm">
+                      {errors.thirdPartyUnitNumber}
+                    </p>
                   )}
                 </div>
                 <div className="col-span-3 p-2">
@@ -556,15 +718,15 @@ function Insurance() {
                     </span>
                   </label>
                   <input
-                    value={streetNumber}
-                    onChange={(e) => setStreetNumber(e.target.value)}
+                    value={thirdPartyStreetNumber}
+                    onChange={(e) => setThirdPartyStreetNumber(e.target.value)}
                     type="text"
                     className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                     placeholder="Enter Street Number"
                   />
-                  {errors.streetNumber && (
+                  {errors.thirdPartyStreetNumber && (
                     <p className="text-red-500 text-sm">
-                      {errors.streetNumber}
+                      {errors.thirdPartyStreetNumber}
                     </p>
                   )}
                 </div>
@@ -576,14 +738,16 @@ function Insurance() {
                     </span>
                   </label>
                   <input
-                    value={streetName}
-                    onChange={(e) => setstreetName(e.target.value)}
+                    value={thirdPartyStreetName}
+                    onChange={(e) => setThirdPartystreetName(e.target.value)}
                     type="text"
                     className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                     placeholder="Enter Street Name "
                   />
-                  {errors.streetName && (
-                    <p className="text-red-500 text-sm">{errors.streetName}</p>
+                  {errors.thirdPartyStreetName && (
+                    <p className="text-red-500 text-sm">
+                      {errors.thirdPartyStreetName}
+                    </p>
                   )}
                 </div>
                 <div className="col-span-3 p-2">
@@ -594,14 +758,16 @@ function Insurance() {
                     </span>
                   </label>
                   <input
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
+                    value={thirdPartyCity}
+                    onChange={(e) => setThirdPartyCity(e.target.value)}
                     type="text"
                     className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                     placeholder="Enter City"
                   />
-                  {errors.city && (
-                    <p className="text-red-500 text-sm">{errors.city}</p>
+                  {errors.thirdPartyCity && (
+                    <p className="text-red-500 text-sm">
+                      {errors.thirdPartyCity}
+                    </p>
                   )}
                 </div>
                 <div className="col-span-3 p-2">
@@ -612,14 +778,16 @@ function Insurance() {
                     </span>
                   </label>
                   <input
-                    value={province}
-                    onChange={(e) => setProvince(e.target.value)}
+                    value={thirdPartyProvince}
+                    onChange={(e) => setThirdPartyProvince(e.target.value)}
                     type="text"
                     className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                     placeholder="Enter Province "
                   />
-                  {errors.province && (
-                    <p className="text-red-500 text-sm">{errors.province}</p>
+                  {errors.thirdPartyProvince && (
+                    <p className="text-red-500 text-sm">
+                      {errors.thirdPartyProvince}
+                    </p>
                   )}
                 </div>
                 <div className="col-span-3 p-2">
@@ -630,14 +798,16 @@ function Insurance() {
                     </span>
                   </label>
                   <input
-                    value={postalCode}
-                    onChange={(e) => setPostalCode(e.target.value)}
+                    value={thirdPartyPostalCode}
+                    onChange={(e) => setThirdPartyPostalCode(e.target.value)}
                     type="text"
                     className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                     placeholder="Enter Postal Code "
                   />
-                  {errors.postalCode && (
-                    <p className="text-red-500 text-sm">{errors.postalCode}</p>
+                  {errors.thirdPartyPostalCode && (
+                    <p className="text-red-500 text-sm">
+                      {errors.thirdPartyPostalCode}
+                    </p>
                   )}
                 </div>
               </>
@@ -650,15 +820,17 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={thirdPartyPolicyNo}
+                onChange={(e) => setThirdPartyPolicyNo(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Policy No"
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.thirdPartyPolicyNo && (
+                <p className="text-red-500 text-sm">
+                  {errors.thirdPartyPolicyNo}
+                </p>
+              )}
             </div>
           </div>
           <p className="text-md upppercase mt-3 text-gray-600 py-2 bg-gray-200 px-2">
@@ -671,15 +843,17 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={thirdPartyAdjusterCompany}
+                onChange={(e) => setThirdPartyAdjusterCompany(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Adjuster Company"
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.thirdPartyAdjusterCompany && (
+                <p className="text-red-500 text-sm">
+                  {errors.thirdPartyAdjusterCompany}
+                </p>
+              )}
             </div>{" "}
             <div className="col-span-3 p-2">
               <label>
@@ -703,15 +877,17 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={thirdPartyFirstName}
+                onChange={(e) => setThirdPartyFirstName(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter First Name"
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.thirdPartyFirstName && (
+                <p className="text-red-500 text-sm">
+                  {errors.thirdPartyFirstName}
+                </p>
+              )}
             </div>{" "}
             <div className="col-span-3 p-2">
               <label>
@@ -719,15 +895,17 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={thirdPartyLastName}
+                onChange={(e) => setThirdPartyLastName(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Last Name"
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.thirdPartyLastName && (
+                <p className="text-red-500 text-sm">
+                  {errors.thirdPartyLastName}
+                </p>
+              )}
             </div>{" "}
             <div className="col-span-3 p-2">
               <label>
@@ -735,15 +913,17 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={thirdPartyTollFree}
+                onChange={(e) => setThirdPartyTollFree(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Toll free"
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.thirdPartyTollFree && (
+                <p className="text-red-500 text-sm">
+                  {errors.thirdPartyTollFree}
+                </p>
+              )}
             </div>{" "}
             <div className="col-span-3 p-2">
               <label>
@@ -751,15 +931,15 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={thirdPartyPhone}
+                onChange={(e) => setThirdPartyPhone(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Telephone"
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.thirdPartyPhone && (
+                <p className="text-red-500 text-sm">{errors.thirdPartyPhone}</p>
+              )}
             </div>{" "}
             <div className="col-span-3 p-2">
               <label>
@@ -767,15 +947,15 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={thirdPartyExt}
+                onChange={(e) => setThirdPartyExt(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Ext"
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.thirdPartyExt && (
+                <p className="text-red-500 text-sm">{errors.thirdPartyExt}</p>
+              )}
             </div>{" "}
             <div className="col-span-3 p-2">
               <label>
@@ -783,15 +963,17 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={thirdPartyFaxNumber}
+                onChange={(e) => setThirdPartyFaxNumber(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Fax"
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.thirdPartyFaxNumber && (
+                <p className="text-red-500 text-sm">
+                  {errors.thirdPartyFaxNumber}
+                </p>
+              )}
             </div>{" "}
             <div className="col-span-3 p-2">
               <label>
@@ -799,15 +981,15 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={thirdPartyEmail}
+                onChange={(e) => setThirdPartyEmail(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Email"
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.thirdPartyEmail && (
+                <p className="text-red-500 text-sm">{errors.thirdPartyEmail}</p>
+              )}
             </div>{" "}
             <div className="col-span-3 p-2">
               <label>
@@ -815,20 +997,20 @@ function Insurance() {
                 <span className="text-red-600 font-bold text-md pl-1">*</span>
               </label>
               <input
-                //   value={time}
-                //   onChange={(e) => setTime(e.target.value)}
+                value={thirdPartyNote}
+                onChange={(e) => setThirdPartyNote(e.target.value)}
                 type="text"
                 className="w-full py-1 px-2 mt-1 text-md h-25 border border-gray-300"
                 placeholder="Enter Note"
               />
-              {/* {errors.time && (
-                  <p className="text-red-500 text-sm">{errors.time}</p>
-                )} */}
+              {errors.thirdPartyNote && (
+                <p className="text-red-500 text-sm">{errors.thirdPartyNote}</p>
+              )}
             </div>
           </div>
           <div className="flex justify-center pt-5">
             <button
-            //   onClick={() => CreateClientInformation()}
+              onClick={() => CreateInsurance()}
               className="ml-2 px-10 rounded py-2 text-lg text-white bg-gradient-to-r from-[#1b3973] to-[#1c8be7]"
             >
               Save

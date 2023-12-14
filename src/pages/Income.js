@@ -38,6 +38,10 @@ const ClientInformation = () => {
       myHeaders.append("ContentType", "application/json");
 
       const formdata = new FormData();
+      formdata.append("type", incomeType);
+      formdata.append("description", description);
+      formdata.append("income_period", incomePeriod);
+      formdata.append("income", income);
 
       const requestOptions = {
         method: "POST",
@@ -163,7 +167,10 @@ const ClientInformation = () => {
             </div>
           </div>
           <div className="flex justify-center pt-5">
-            <button onClick={()=>CreateOtherIncome()} className="ml-2 px-10 rounded py-2 text-lg text-white bg-gradient-to-r from-[#1b3973] to-[#1c8be7]">
+            <button
+              onClick={() => CreateOtherIncome()}
+              className="ml-2 px-10 rounded py-2 text-lg text-white bg-gradient-to-r from-[#1b3973] to-[#1c8be7]"
+            >
               Save
             </button>
           </div>
